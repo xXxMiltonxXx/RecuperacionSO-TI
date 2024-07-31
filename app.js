@@ -1,5 +1,7 @@
-// Grupo #
-// Milton Angamarca
+// Grupo6
+// Anchundia Armas Julisa
+// Intriago Segovia Manuel
+//Pico Arteaga Delly Gustavo
 
 const express = require("express");
 const app = express();
