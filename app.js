@@ -1,10 +1,8 @@
 // Grupo #8
-//Campuzano Espinal Daiton Bernardo
-// Grupo #1
-// Alejandro Bueno Peralta
+//Cedeño
+// Bailon
+// Anchundia
 
-// Grupo #11
-// Tucker Bermúdez Julio Andres
 
 
 const express = require("express");
