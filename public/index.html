@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Management</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-blue-100">
+    <div class="container mx-auto p-8">
+      <h1 class="text-3xl font-bold mb-6 text-center">Library Management</h1>
+      <form id="bookForm" class="mb-6">
+        <input
+          type="text"
+          id="titleInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Book Title"
+        />
+        <input
+          type="text"
+          id="authorInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+          placeholder="Author"
+        />
+        <input
+          type="text"
+          id="genreInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+          placeholder="Genre"
+        />
+        <input
+          type="number"
+          id="yearInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+          placeholder="Year"
+        />
+        <button
+          type="submit"
+          class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Book
+        </button>
+      </form>
+      <ul id="bookList" class="list-disc pl-5"></ul>
+    </div>
+
+    <script>
+      document
+        .getElementById("bookForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const titleInput = document.getElementById("titleInput").value.trim();
+          const authorInput = document.getElementById("authorInput").value.trim();
+          const genreInput = document.getElementById("genreInput").value.trim();
+          const yearInput = document.getElementById("yearInput").value;
+
+          if (titleInput && authorInput && genreInput && yearInput) {
+            const response = await fetch("/addBook", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                title: titleInput,
+                author: authorInput,
+                genre: genreInput,
+                year: yearInput,
+              }),
+            });
+
+            if (response.ok) {
+              const newBook = document.createElement("li");
+              newBook.textContent = `${titleInput} - ${authorInput} - ${genreInput} - ${yearInput}`;
+              document.getElementById("bookList").appendChild(newBook);
+              document.getElementById("titleInput").value = "";
+              document.getElementById("authorInput").value = "";
+              document.getElementById("genreInput").value = "";
+              document.getElementById("yearInput").value = "";
+            } else {
+              alert("Failed to add book");
+            }
+          }
+        });
+
+      // Fetch and display books
+      async function fetchBooks() {
+        const response = await fetch("/books");
+        const books = await response.json();
+        const bookList = document.getElementById("bookList");
+        books.forEach((book) => {
+          const li = document.createElement("li");
+          li.textContent = `${book.title} - ${book.author} - ${book.genre} - ${book.year}`;
+          bookList.appendChild(li);
+        });
+      }
+
+      fetchBooks();
+    </script>
+  </body>
+</html>
