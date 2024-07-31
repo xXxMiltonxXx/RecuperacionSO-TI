@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Grupo #8
 //Cedeño
 // Bailon
@@ -5,6 +6,12 @@
 
 
 
+=======
+// Grupo #9
+//willy jordan anchundia
+//Elvis Daniel Bailon Muentes
+//Michael Cedeño Pincay
+>>>>>>> 5728658be99c8b938cc8abd2f8174707a8a3db31
 const express = require("express");
 const app = express();
 const port = 3000;
