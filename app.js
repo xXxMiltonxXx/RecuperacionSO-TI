@@ -1,5 +1,9 @@
 // Grupo #9
+<<<<<<< HEAD
 //Cedeño Pincay
+=======
+//CEdeño Pincay Michael Jair
+>>>>>>> c0e526e (refactor: Added permit names)
 
 
 const express = require("express");
